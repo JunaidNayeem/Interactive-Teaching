@@ -1,17 +1,18 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-import "./assets/scss/global.scss";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import CreateGame from './pages/CreateGame';
+import PlayGame from './pages/PlayGame';
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/create-game" element={<CreateGame />} />
+        <Route path="/play/:gameId" element={<PlayGame />} />
+      </Routes>
+    </Router>
   );
 }
 
