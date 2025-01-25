@@ -14,7 +14,11 @@ const Home = () => {
                         <Link to={`/play/${game.id}`}>{game.name}</Link>
                     </li>
                 ))}
+                
             </ul>
+            <Link to="/canvas">Infinite Canvas</Link>
+            <br/>
+            <Link to="/animalsound">Animal Sound</Link>
         </div>
     );
 };
