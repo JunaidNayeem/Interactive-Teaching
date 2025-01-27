@@ -4,7 +4,9 @@ import Home from './pages/Home';
 import CreateGame from './pages/CreateGame';
 import PlayGame from './pages/PlayGame';
 import InfiniteCanvasPage from './pages/InfiniteCanvas';
-import AnimalSoundPage from './pages/AnimalSoundPage';
+import CreateAnimalSoundGame from './pages/CreateAnimalSoundGame';
+import GamesList from './pages/GameList';
+import PlayAnimalSoundGame from './pages/playAnimalGame';
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
         <Route path="/create-game" element={<CreateGame />} />
         <Route path="/play/:gameId" element={<PlayGame />} />
         <Route path="/canvas" element={<InfiniteCanvasPage />} />
-        <Route path="/animalsound" element={<AnimalSoundPage />} />
+        <Route path="/createanimalsound" element={<CreateAnimalSoundGame />} />
+        <Route path="/games" element={<GamesList />} />
+        <Route path="/playanimal/:id" element={<PlayAnimalSoundGame />} />
       </Routes>
     </Router>
   );
