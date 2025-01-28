@@ -1,18 +1,45 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { io } from "socket.io-client";
+
+const socket = io('https://bbb-canvas-backend.onrender.com');
+
 
  const PlayAnimalSoundGame = () => {
   const { id: gameId } = useParams(); 
-  const games = JSON.parse(localStorage.getItem("animalSoundGames")) || [];
+  // const games = JSON.parse(localStorage.getItem("animalSoundGames")) || [];
+  const [games, setGames] = React.useState([]);
   const game = games.find((g) => g.id === parseInt(gameId));
+
+  useEffect(() => {
+    socket.on('init_games', (initialGames) => {
+      setGames(initialGames);
+    });
+
+    socket.on('update_games', (updatedGames) => {
+      setGames(updatedGames);
+    });
+
+    socket.on('play_audio', (soundUrl) => {
+      const audio = new Audio(soundUrl);
+      audio.play();
+    });
+
+    return () => {
+      socket.off('init_games');
+      socket.off('update_games');
+      socket.off('play_audio');
+    };
+  }, []);
 
   if (!game) {
     return <p>Game not found!</p>;
   }
 
   const handleImageClick = (soundUrl) => {
-    const audio = new Audio(soundUrl);
-    audio.play();
+    // const audio = new Audio(soundUrl);
+    // audio.play();
+    socket.emit('play_audio', soundUrl); // Emit the audio play event to the server
   };
 
   return (
