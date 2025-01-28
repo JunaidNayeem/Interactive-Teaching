@@ -7,6 +7,8 @@ import InfiniteCanvasPage from './pages/InfiniteCanvas';
 import CreateAnimalSoundGame from './pages/CreateAnimalSoundGame';
 import GamesList from './pages/GameList';
 import PlayAnimalSoundGame from './pages/playAnimalGame';
+import Render3DObject from './components/Render3DObject';
+import PaintFill from './components/paintFill';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/createanimalsound" element={<CreateAnimalSoundGame />} />
         <Route path="/games" element={<GamesList />} />
         <Route path="/playanimal/:id" element={<PlayAnimalSoundGame />} />
+        <Route path="/render3d" element={<Render3DObject />} />
+        <Route path="/paintfill" element={<PaintFill />} />
       </Routes>
     </Router>
   );
