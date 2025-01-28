@@ -20,6 +20,11 @@ const Home = () => {
       <Link to="/canvas">Infinite Canvas</Link>
       <br />
       <Link to="/createanimalsound">Animal Sound</Link>
+      <br />
+      <Link to="/render3d">Play with 3D object</Link>
+      <br />
+      <Link to="/paintfill">Color fill shape</Link>
+      <br />
       <ul style={{ marginTop: "20px", listStyleType: "none", padding: 0 }}>
         {animalSoundGames.length > 0 ? (
           animalSoundGames.map((game, index) => (
