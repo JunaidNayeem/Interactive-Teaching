@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate,Link  } from 'react-router-dom';
+import { io } from 'socket.io-client';
+
+const socket = io('https://bbb-canvas-backend.onrender.com');
 
 export const CreateAnimalSoundGame = () => {
   const [animals, setAnimals] = useState([]);
@@ -21,29 +24,56 @@ export const CreateAnimalSoundGame = () => {
     }
   };
 
-  const handleSoundUpload = (e, index) => {
+  // const handleSoundUpload = (e, index) => {
+  //   const newAnimals = [...animals];
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     newAnimals[index] = {
+  //       ...newAnimals[index],
+  //       sound: URL.createObjectURL(file),
+  //     };
+  //     setAnimals(newAnimals);
+  //   }
+  // };
+
+  const handleSoundUpload = async (e, index) => {
     const newAnimals = [...animals];
     const file = e.target.files[0];
     if (file) {
-      newAnimals[index] = {
-        ...newAnimals[index],
-        sound: URL.createObjectURL(file),
-      };
-      setAnimals(newAnimals);
+      const formData = new FormData();
+      formData.append("file", file);
+  
+      try {
+        const response = await fetch("https://bbb-canvas-backend.onrender.com/upload", {
+          method: "POST",
+          body: formData,
+        });
+  
+        const data = await response.json();
+        newAnimals[index] = {
+          ...newAnimals[index],
+          sound: data.fileUrl, // Save the file URL returned by the server
+        };
+        setAnimals(newAnimals);
+      } catch (error) {
+        console.error("Failed to upload sound:", error);
+      }
     }
   };
 
+  
   const addAnimal = () => {
     setAnimals([...animals, { image: "", sound: "" }]);
   };
 
   const saveGame = () => {
-    const savedGames = JSON.parse(localStorage.getItem("animalSoundGames")) || [];
+    // const savedGames = JSON.parse(localStorage.getItem("animalSoundGames")) || [];
     const newGame = {
       id: Date.now(),
       animals,
     };
-    localStorage.setItem("animalSoundGames", JSON.stringify([...savedGames, newGame]));
+    // localStorage.setItem("animalSoundGames", JSON.stringify([...savedGames, newGame]));
+    socket.emit('new_game', newGame); // Emit the new game event to the server
     navigate("/games");
   };
 
