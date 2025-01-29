@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { SketchPicker } from "react-color";
 import { io } from "socket.io-client";
 
-const socket = io("https://bbb-canvas-backend.onrender.com");
+// const socket = io("https://bbb-canvas-backend.onrender.com");
+const socket = io("http://localhost:5000");
 
 const PaintFill = () => {
   const [shapes, setShapes] = useState([]);

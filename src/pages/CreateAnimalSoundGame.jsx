@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate,Link  } from 'react-router-dom';
 import { io } from 'socket.io-client';
 
-const socket = io('https://bbb-canvas-backend.onrender.com');
+// const socket = io('https://bbb-canvas-backend.onrender.com');
+const socket = io("http://localhost:5000");
 
 export const CreateAnimalSoundGame = () => {
   const [animals, setAnimals] = useState([]);
@@ -44,7 +45,7 @@ export const CreateAnimalSoundGame = () => {
       formData.append("file", file);
   
       try {
-        const response = await fetch("https://bbb-canvas-backend.onrender.com/upload", {
+        const response = await fetch("http://localhost:5000/upload", {
           method: "POST",
           body: formData,
         });
@@ -52,7 +53,7 @@ export const CreateAnimalSoundGame = () => {
         const data = await response.json();
         newAnimals[index] = {
           ...newAnimals[index],
-          sound: data.fileUrl, // Save the file URL returned by the server
+          sound: data.fileUrl,
         };
         setAnimals(newAnimals);
       } catch (error) {

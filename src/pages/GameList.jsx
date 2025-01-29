@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { io } from "socket.io-client";
 
-const socket = io('https://bbb-canvas-backend.onrender.com');
+// const socket = io('https://bbb-canvas-backend.onrender.com');
+const socket = io("http://localhost:5000");
 
 const GamesList = () => {
   const [games, setGames] = useState([]);

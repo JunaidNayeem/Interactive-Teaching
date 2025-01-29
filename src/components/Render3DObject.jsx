@@ -4,7 +4,8 @@ import { OrbitControls } from "@react-three/drei";
 import io from "socket.io-client";
 
 // Connect to the Socket.IO server
-const socket = io("https://bbb-canvas-backend.onrender.com");
+// const socket = io("https://bbb-canvas-backend.onrender.com");
+const socket = io("http://localhost:5000");
 
 function Box({ id, rotation, onInteraction }) {
   const meshRef = useRef();
