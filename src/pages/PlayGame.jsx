@@ -13,8 +13,8 @@ const PlayGame = () => {
             {game && (
                 <GameCanvas
                     imageSrc={game.imageSrc}
-                    imagePosition={game.imagePosition || { x: 0, y: 0 }} // Ensure imagePosition is passed
-                    setImagePosition={() => { }} // No need to update the position in PlayGame
+                    imagePosition={game.imagePosition || { x: 0, y: 0 }} 
+                    setImagePosition={() => { }}
                 />
             )}
         </div>
